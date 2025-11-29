@@ -57,4 +57,4 @@ class Post(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.title} - {'Published' if self.is_published else 'Draft'}"
+        return f"{self.title} - {'Published' if self.status else 'Draft'}"
