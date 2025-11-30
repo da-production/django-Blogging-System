@@ -32,7 +32,7 @@ STATUS_CHOICES = (
     ('private', 'Private'),
 )
 class Post(models.Model):
-    author = models.OneToOneField(User,max_length=100, null=True, blank=True, on_delete=models.SET_NULL, related_name='posts')
+    author = models.ForeignKey(User,max_length=100, null=True, blank=True, on_delete=models.SET_NULL, related_name='posts')
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, max_length=200, help_text="A unique identifier for the post, used in URLs.", editable=False)
     content = models.TextField(null=True, blank=True)
