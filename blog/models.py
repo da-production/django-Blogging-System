@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from django.conf import settings
 # Create your models here.
 class Category(models.Model):
     name = models.CharField(max_length=100)
@@ -32,7 +33,7 @@ STATUS_CHOICES = (
     ('private', 'Private'),
 )
 class Post(models.Model):
-    author = models.ForeignKey(User,max_length=100, null=True, blank=True, on_delete=models.SET_NULL, related_name='posts')
+    author = models.ForeignKey(settings.AUTH_USER_MODEL,max_length=100, null=True, blank=True, on_delete=models.SET_NULL, related_name='posts', default=None)
     title = models.CharField(max_length=200)
     slug = models.SlugField(unique=True, max_length=200, help_text="A unique identifier for the post, used in URLs.", editable=False)
     content = models.TextField(null=True, blank=True)

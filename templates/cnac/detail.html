@@ -1,0 +1,91 @@
+<div class="card p-4">
+    <h2 class="card-title">Verification Result</h2>
+    {% if result is not None and result != "" %}
+    <!-- Card Info Promoteur -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Informations du Promoteur</h4>
+        </div>
+        <div class="card-body">
+
+            <div class="row">
+                <div class="col-md-4">
+                    <p><strong>Nom :</strong> {{ result.data.Nom }}</p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Prénom :</strong> {{ result.data.Prenom }}</p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>NIN :</strong> {{ result.data.NIN }}</p>
+                </div>
+            </div>
+
+            <div class="row mt-2">
+                <div class="col-md-4">
+                    <p><strong>Commune de Naissance :</strong> {{ result.data.CommuneNaissance }}</p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Date de Naissance :</strong> {{ result.data.DateNaissance }}</p>
+                </div>
+                <div class="col-md-4">
+                    <p><strong>Téléphone :</strong> {{ result.data.Telephone }}</p>
+                </div>
+            </div>
+
+            <p class="mt-2"><strong>Adresse :</strong><br> {{ result.data.Adresse }}</p>
+
+        </div>
+    </div>
+
+    <!-- Liste des Doléances -->
+    <div class="card shadow-sm">
+        <div class="card-header bg-secondary text-white">
+            <h4 class="mb-0">Liste des Doléances</h4>
+        </div>
+
+        <div class="card-body">
+
+            {% if result.data.Doleances %}
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Titre</th>
+                            <th>Description</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for d in result.data.Doleances %}
+                        <tr>
+                            <td>{{ d.Titre }}</td>
+                            <td>{{ d.Description }}</td>
+                            <td>
+                                {% if d.Statut == "Rejetée" %}
+                                <span class="badge bg-danger">{{ d.Statut }}</span>
+                                {% elif d.Statut == "En cours" %}
+                                <span class="badge bg-warning text-dark">{{ d.Statut }}</span>
+                                {% elif d.Statut == "En attente" %}
+                                <span class="badge bg-info text-dark">{{ d.Statut }}</span>
+                                {% else %}
+                                <span class="badge bg-secondary">{{ d.Statut }}</span>
+                                {% endif %}
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p class="text-muted">Aucune doléance trouvée.</p>
+            {% endif %}
+
+        </div>
+
+    </div>
+    {% else %}
+    <div class="alert alert-secondary" role="alert">
+        No result to display yet. Submit a NIN to see results.
+    </div>
+    {% endif %}
+</div>

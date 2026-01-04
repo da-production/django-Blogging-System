@@ -1,0 +1,58 @@
+<div class="card p-4 mb-4">
+    <!-- messages.html -->
+    {% if messages %}
+    <div>
+        {% for message in messages %}
+        <div class="alert 
+                        {% if message.tags == 'debug' %}alert-secondary
+                        {% elif message.tags == 'info' %}alert-info
+                        {% elif message.tags == 'success' %}alert-success
+                        {% elif message.tags == 'warning' %}alert-warning
+                        {% elif message.tags == 'error' %}alert-danger
+                        {% else %}alert-primary{% endif %} 
+                        alert-dismissible fade show" role="alert">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <h2 class="card-title">Recherche Promoteur</h2>
+
+    <form method="get" action="">
+        <div class="row g-2 align-items-end">
+            <!-- NIN -->
+            <div class="col-md-3">
+                <label for="ninInput" class="form-label">NIN</label>
+                <input type="text" class="form-control" id="ninInput" name="nin" placeholder="Entrez NIN si disponible"
+                    value="{{ request.GET.nin }}">
+            </div>
+
+            <!-- OU -->
+            <div class="col-md-1 text-center d-flex align-items-center justify-content-center">
+                <span class="fw-bold">OU</span>
+            </div>
+
+            <!-- Nom -->
+            <div class="col-md-3">
+                <label for="nomInput" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="nomInput" name="nom" placeholder="Entrez le nom"
+                    value="{{ request.GET.nom }}">
+            </div>
+
+            <!-- Prénom -->
+            <div class="col-md-3">
+                <label for="prenomInput" class="form-label">Prénom</label>
+                <input type="text" class="form-control" id="prenomInput" name="prenom" placeholder="Entrez le prénom"
+                    value="{{ request.GET.prenom }}">
+            </div>
+
+            <!-- Bouton -->
+            <div class="col-md-2 d-grid">
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+            </div>
+        </div>
+    </form>
+
+
+</div>

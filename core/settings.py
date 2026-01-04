@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'blog.apps.BlogConfig',
+    'Organisation.apps.OrganisationConfig',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'blog.context_processors.categories',
+                'Organisation.context_processors.organisations',
             ],
         },
     },
@@ -100,6 +102,17 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+AUTH_USER_MODEL = 'Organisation.User'
+# settings.py
+
+# Hôte de Redis (localhost si Redis est installé sur le même serveur)
+REDIS_HOST = '127.0.0.1'
+# Port par défaut de Redis
+REDIS_PORT = 6379
+# Base de données Redis (0 à 15) pour séparer les données
+REDIS_DB = 0
+# Préfixe pour les clés Redis afin d'éviter les conflits
+REDIS_PREFIX = 'external_api:'
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/

@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from blog.models import Category, Post
 def home(request):
     featured_posts = Post.objects.filter(is_featured=True).order_by('-updated_at')[:3]
@@ -9,11 +9,3 @@ def home(request):
     }
     return render(request, 'home.html', context)
 
-def category_posts(request, category_id):
-    category = get_object_or_404(Category, id=category_id)
-    posts = Post.objects.filter(category_id=category_id).order_by('-updated_at')
-    context = {
-        'posts': posts,
-        'category': category
-    }
-    return render(request, 'category_posts.html', context)
